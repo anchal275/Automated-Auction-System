@@ -1,0 +1,32 @@
+package com.auction.usecases;
+
+import java.util.Scanner;
+
+import com.auction.Dao.SellerDao;
+import com.auction.Dao.SellerDaoImpl;
+import com.auction.bean.Seller;
+
+public class SellerUsecases {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Seller Name");
+		String Sname = sc.next();
+		
+		System.out.println("Enter Seller Email");
+		String Semail = sc.next();
+		
+		System.out.println("Enter Seller Password");
+		String Spassword = sc.next();
+		
+		SellerDao sdao = new SellerDaoImpl();
+        Seller seller = new Seller(Sname, Semail, Spassword);
+		String result = sdao.registerSeller(seller);
+		System.out.println(result);
+		
+		
+		
+		
+	}
+
+}

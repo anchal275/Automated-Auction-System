@@ -1,0 +1,8 @@
+package com.auction.Dao;
+
+public interface SellerDao {
+	
+	public String registerSeller(String Sname, String Semail, String Spassword );
+	
+
+}

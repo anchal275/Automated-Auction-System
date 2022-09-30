@@ -1,0 +1,120 @@
+create table Admin(
+adminID int primary key auto_increment,
+name varchar(12) NOT NUll,
+email varchar(25) unique NOT NUll,
+password varchar(8) NOT NUll
+);
+
+
+mysql> desc Admin;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| adminID  | int         | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(12) | NO   |     | NULL    |                |
+| email    | varchar(25) | NO   | UNI | NULL    |                |
+| password | varchar(8)  | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+Hardcoded details of Admin:====================================================================================
+
+mysql> select * from Admin;
++---------+---------+-------------------+----------+
+| adminID | name    | email             | password |
++---------+---------+-------------------+----------+
+|       1 | Shreyas | shreyas@gmail.com | admin1   |
+|       2 | Anchal  | anchal@gmail.com  | admin2   |
+|       3 | Vivek   | vivek@gmail.com   | admin3   |
++---------+---------+-------------------+----------+
+3 rows in set (0.04 sec)
+
+
+================================================================================================================
+
+
+
+Seller ===============================================================================================
+
+Create table Seller(
+SellerID int Primary key auto_increment,
+Sname varchar(12) Not Null,
+Semail varchar(25) Unique Not Null,
+Spassword varchar(8) Not Null
+);
+
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| SellerID  | int         | NO   | PRI | NULL    | auto_increment |
+| Sname     | varchar(12) | NO   |     | NULL    |                |
+| Semail    | varchar(25) | NO   | UNI | NULL    |                |
+| Spassword | varchar(8)  | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+
+
+
+Buyer====================================================================================================
+
+Create table Buyer(
+BuyerID int Primary key auto_increment,
+Bname varchar(12) Not Null,
+Bemail varchar(25) Unique Not Null,
+Bpassword varchar(8) Not Null
+);
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| BuyerID   | int         | NO   | PRI | NULL    | auto_increment |
+| Bname     | varchar(12) | NO   |     | NULL    |                |
+| Bemail    | varchar(25) | NO   | UNI | NULL    |                |
+| Bpassword | varchar(8)  | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+
+========================================================================================================
+
+mysql> Select * from Seller;
++----------+---------+-------------------+-----------+
+| SellerID | Sname   | Semail            | Spassword |
++----------+---------+-------------------+-----------+
+|        1 | Aniket  | aniket@gmail.com  | ani123    |
+|        2 | Shruti  | shruti@gmail.com  | shr123    |
+|        3 | Vaibhav | vaibhav@gmail.com | vai123    |
+|        4 | Rahul   | rahul@gmail.com   | rah123    |
++----------+---------+-------------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from buyer;
++---------+----------+--------------------+-----------+
+| BuyerID | Bname    | Bemail             | Bpassword |
++---------+----------+--------------------+-----------+
+|       1 | Devi     | devi@gmail.com     | Dev123    |
+|       3 | Ben      | ben@gmail.com      | ben123    |
+|       4 | Paxton   | paxton@gmail.com   | pax123    |
+|       5 | Ellenore | ellenore@gmail.com | ell123    |
++---------+----------+--------------------+-----------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

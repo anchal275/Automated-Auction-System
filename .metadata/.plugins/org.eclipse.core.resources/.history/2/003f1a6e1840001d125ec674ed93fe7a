@@ -1,0 +1,39 @@
+package com.auction.Dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.auction.bean.Buyer;
+import com.auction.utility.DBUtil;
+
+public class BuyerDaoImpl implements BuyerDao{
+
+	@Override
+	public String registerBuyer(Buyer buyer) {
+		 String message = "Buyer Not Inserted";
+		 
+		 try(Connection conn = DBUtil.ProvideConnection()) {
+				PreparedStatement ps = 
+				conn.prepareStatement("Insert into Buyer(Bname,Bemail,Bpassword) values(?,?,?)");
+				
+				ps.setString(1, buyer.getBname());
+				ps.setString(2, buyer.getBemail());
+				ps.setString(3, buyer.getBpassword());
+				
+				int x = ps.executeUpdate();
+			     if(x>0) {	
+			    	 message = "Buyer Inserted Successfully";
+			    	 
+			     }	
+				 
+				} catch (SQLException e) {
+					message = e.getMessage();
+				}
+		return message;
+	}
+	
+	
+	
+
+}

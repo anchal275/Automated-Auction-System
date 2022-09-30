@@ -1,0 +1,39 @@
+package com.auction.Dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.auction.bean.Seller;
+import com.auction.utility.DBUtil;
+
+
+public class SellerDaoImpl implements SellerDao{
+
+	@Override
+	public String registerSeller(Seller seller) {
+	    String message = "Seller Not Inserted";
+	    
+	try(Connection conn = DBUtil.ProvideConnection()) {
+	PreparedStatement ps = 
+	conn.prepareStatement("Insert into Seller(Sname,Semail,Spassword) values(?,?,?)");
+	  
+	ps.setString(1, seller.getSname());
+	ps.setString(2, seller.getSemail());
+	ps.setString(3, seller.getSpassword());
+	
+	int x = ps.executeUpdate();
+     if(x>0) {	
+    	 message = "Seller Inserted Successfully";
+    	 
+     }	
+	 
+	} catch (SQLException e) {
+		message = e.getMessage();
+	}
+	      
+		return message;
+	}
+	
+
+}
