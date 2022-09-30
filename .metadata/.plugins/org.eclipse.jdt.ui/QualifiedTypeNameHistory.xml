@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="com.auction.Dao.SellerDao"/>
+    <fullyQualifiedTypeName name="com.auction.Dao.SellerDaoImpl"/>
+    <fullyQualifiedTypeName name="com.auction.Dao.BuyerDao"/>
+    <fullyQualifiedTypeName name="com.auction.Dao.BuyerDaoImpl"/>
+    <fullyQualifiedTypeName name="com.auction.bean.Buyer"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="com.auction.utility.DBUtil"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="com.auction.exceptions.SellerException"/>
+    <fullyQualifiedTypeName name="com.auction.bean.Seller"/>
+    <fullyQualifiedTypeName name="com.auction.exceptions.BuyerException"/>
+    <fullyQualifiedTypeName name="com.auction.bean.Admin"/>
+    <fullyQualifiedTypeName name="com.auction.Dao.AdminDao"/>
+    <fullyQualifiedTypeName name="com.auction.exceptions.AdminException"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+</qualifiedTypeNameHistroy>

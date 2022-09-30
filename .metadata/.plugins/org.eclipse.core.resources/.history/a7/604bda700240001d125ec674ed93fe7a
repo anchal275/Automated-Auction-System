@@ -1,0 +1,5 @@
+package com.auction.Dao;
+
+public class SellerDaoImpl {
+
+}

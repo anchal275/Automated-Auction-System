@@ -1,0 +1,29 @@
+package com.auction.bean;
+
+public class Buyer {
+	private int BuyerID;
+	private String Bname;
+	private String Bemail;    
+	private String Bpassword;
+	public Buyer(int buyerID, String bname, String bemail, String bpassword) {
+		super();
+		BuyerID = buyerID;
+		Bname = bname;
+		Bemail = bemail;
+		Bpassword = bpassword;
+	}
+	
+	public Buyer() {
+		super();
+	}
+	
+	public Buyer(String bname, String bemail, String bpassword) {
+		super();
+		Bname = bname;
+		Bemail = bemail;
+		Bpassword = bpassword;
+	}
+	
+	
+	
+}

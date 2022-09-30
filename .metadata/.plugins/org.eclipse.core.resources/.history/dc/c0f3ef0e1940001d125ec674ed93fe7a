@@ -1,0 +1,11 @@
+package com.auction.bean;
+
+public class Admin {
+	
+	private int adminID;
+	private String name;
+	private String email;
+	private String password;
+	
+
+}

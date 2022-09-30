@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+E:\Automated Auction System\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+2905757548.index
+1133148931.index
+2474453329.index

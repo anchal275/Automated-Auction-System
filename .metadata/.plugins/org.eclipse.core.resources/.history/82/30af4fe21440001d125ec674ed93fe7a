@@ -1,0 +1,10 @@
+package com.auction.Dao;
+
+import com.auction.bean.Seller;
+
+public interface SellerDao {
+	
+	public String registerSeller(Seller seller);
+	
+
+}
