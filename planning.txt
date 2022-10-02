@@ -77,7 +77,7 @@ Bpassword varchar(8) Not Null
 
 ========================================================================================================
 
-mysql> Select * from Seller;
+mysql> select * from seller;
 +----------+---------+-------------------+-----------+
 | SellerID | Sname   | Semail            | Spassword |
 +----------+---------+-------------------+-----------+
@@ -85,8 +85,10 @@ mysql> Select * from Seller;
 |        2 | Shruti  | shruti@gmail.com  | shr123    |
 |        3 | Vaibhav | vaibhav@gmail.com | vai123    |
 |        4 | Rahul   | rahul@gmail.com   | rah123    |
+|        5 | Dhruv   | dhruv@gmail.com   | dhr123    |
+|        6 | Viraj   | viraj@gmail.com   | vir123    |
 +----------+---------+-------------------+-----------+
-4 rows in set (0.00 sec)
+6 rows in set (0.00 sec)
 
 mysql> select * from buyer;
 +---------+----------+--------------------+-----------+
@@ -99,14 +101,62 @@ mysql> select * from buyer;
 +---------+----------+--------------------+-----------+
 4 rows in set (0.00 sec)
 
+Create table Item (
+ItemId int Primary key auto_increment,
+IName varchar(12) NOT NULL,
+Price int NOT NULL,
+Quantity int,
+Category varchar(12) NOT NULL,
+SellerID int NOT NULL,
+FOREIGN KEY (SellerID) REFERENCES Seller(SellerID)
+);
+
+
+mysql> desc item;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| ItemId   | int         | NO   | PRI | NULL    | auto_increment |
+| IName    | varchar(12) | NO   |     | NULL    |                |
+| Price    | int         | NO   |     | NULL    |                |
+| Quantity | int         | YES  |     | NULL    |                |
+| Category | varchar(12) | NO   |     | NULL    |                |
+| SellerID | int         | NO   | MUL | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+IName Price Quantity Category SellerID
+
+mysql> select * from item;
++--------+---------+-------+----------+----------+----------+
+| ItemId | IName   | Price | Quantity | Category | SellerID |
++--------+---------+-------+----------+----------+----------+
+|      3 | Toy     |   500 |       30 | Kids     |        1 |
+|      4 | Jeans   |  1000 |       10 | mens     |        3 |
+|      5 | Kurti   |  2000 |       20 | Womens   |        3 |
+|      6 | shirt   |  2000 |       20 | mens     |        1 |
+|      7 | Saree   |  5000 |       10 | Womens   |        1 |
+|      8 | Dresses |   200 |       40 | Womens   |        1 |
+|      9 | heels   |   800 |       30 | Footwear |        1 |
++--------+---------+-------+----------+----------+----------+
+7 rows in set (0.00 sec)
 
 
 
 
+DELETE from Item INNER JOIN Seller ON Item.SellerID = Seller.SellerID AND ItemId = 3;
 
+Create table Sold (
+SitemId int Primary key,
+SName varchar(12) NOT NULL,
+Price int NOT NULL,
+Quantity int,
+Category varchar(12) NOT NULL,
+BuyerID int NOT NULL,
+FOREIGN KEY (BuyerID) REFERENCES Buyer(BuyerID)
+);
 
-
-
+SitemId  SName Price Quantity  Category  BuyerID 
 
 
 

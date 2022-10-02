@@ -1,0 +1,111 @@
+package com.auction.usecases;
+
+import java.util.List;
+import java.util.Scanner;
+
+import com.auction.Dao.AdminDao;
+import com.auction.Dao.AdminDaoImpl;
+import com.auction.bean.Seller;
+
+public class DriverMain {
+
+	public static void main(String[] args) {
+       Scanner sc = new Scanner(System.in);
+       System.out.println("Welcome to the Automated Auction System!");
+       while(true) {
+       System.out.println("Please Select a option to continue : ");
+       System.out.println("1. Login as a Admin");
+       System.out.println("2. Login/Register as a Seller");
+       System.out.println("3. Login/Register as a Buyer");
+       System.out.println("4. Exit");
+       int choice = sc.nextInt();
+       if(choice == 1) {
+      	 boolean login = AdminUsecases.AdminloginUsecase();
+      	 if(login) {
+      		 while(true) {
+      			 System.out.println("Plesae Enter Your Choice");
+              	 System.out.println("1. View the registered buyer list.");
+              	 System.out.println("2. View the registered Seller list.");
+              	 System.out.println("3. View the daily selling report.");
+              	 System.out.println("4. Exit");
+              	 int Achoice = sc.nextInt();
+              	 if(Achoice==1) {
+              		 AdminDao Adao = new AdminDaoImpl();
+              		 List<Seller> sellerlist = Adao.getSellerList();
+              		 sellerlist.forEach(s -> {
+              			System.out.println("Seller id is : "+ s.getSellerID());
+              			System.out.println("Seller Name is : "+ s.getSname());
+              			System.out.println("Seller Email is : "+ s.getSemail());
+              			System.out.println("Seller Password is : "+ s.getSpassword());
+              			System.out.println("================================");
+              		 });
+              	 }else if(Achoice ==2 ) {
+              		 
+              	 }else if(Achoice == 3 ) {
+              		 
+              	 }else if(Achoice == 4) {
+                      break;
+              	 }else {
+              		System.out.println("Please choose the correct option");
+              	 }
+      		 }	 
+      	 }
+         }else if(choice == 2) {
+      	   System.out.println("Choose A Option :");
+      	   System.out.println("1. Login as a Seller");
+      	   System.out.println("2. Register as a Seller");
+      	   int num = sc.nextInt();
+      	   if(num==1) {
+      		boolean login = SellerUsecases.SellerloginUsecase();
+      		if(login) {
+      			while(true) {
+      		    System.out.println("Plesae Enter Your Choice");
+                System.out.println("1. Create list of items to sell.");
+                System.out.println("2. Update Item price, quantity");
+                System.out.println("3. Add new Item in the list.");
+                System.out.println("4. Remove items from the list.");
+                System.out.println("5. View the sold Item history.");	
+                System.out.println("6. Exit");
+                int Schoice = sc.nextInt();
+             	System.out.println(Schoice);
+      			}
+         	}
+      	   }else if(num==2) {
+      		   String register = SellerUsecases.SellerRegisterUsecase();
+          	   System.out.println(register);   
+      	   }else {
+      		   System.out.println("Please select a correct option");
+      	   }
+         }else if(choice == 3) {
+           System.out.println("Choose A Option :");
+           System.out.println("1. Login as a Buyer");
+           System.out.println("2. Register as a Buyer");
+           int num = sc.nextInt();
+           if(num==1) {
+        	boolean login = BuyerUsecases.BuyerloginUsecase();
+          	if(login) {
+          	   while(true) {
+          		 System.out.println("Plesae Enter Your Choice");
+                 System.out.println("1. Search and view Items by category");
+                 System.out.println("2. Select and view all the sellers and also their Items category wise.");
+                 System.out.println("3. Selects Items to buy.");	
+                 System.out.println("4. Exit");
+                 int Bchoice = sc.nextInt();
+              	 System.out.println(Bchoice);
+          	   }
+          	}
+           }else if(num==2) {
+        	   String register = BuyerUsecases.BuyerRegisterUsecase();
+          	   System.out.println(register);
+           }else {
+        	   System.out.println("Please select a correct option");
+           }
+         }else if(choice ==4) {
+        	 System.out.println("Thankyou For Using Auction Management System");
+         }else {
+      	   System.out.println("Please Enter The Correct Choice");
+         }
+       
+  	}
+	}
+}

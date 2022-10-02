@@ -1,0 +1,60 @@
+package com.auction.usecases;
+
+import java.util.Scanner;
+
+import com.auction.Dao.SellerDao;
+import com.auction.Dao.SellerDaoImpl;
+import com.auction.bean.Seller;
+import com.auction.exceptions.SellerException;
+
+public class SellerUsecases {
+	
+		public static boolean SellerloginUsecase() {
+			
+			boolean login = false;
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Enter Seller Username");
+			String username = sc.next();
+			
+			System.out.println("Enter Seller Password");
+			String password = sc.next();
+			
+			SellerDao Sdao = new SellerDaoImpl();
+			try {
+				Seller seller = Sdao.loginSeller(username, password);
+				System.out.println("Welcome Seller " + seller.getSname());
+				login = true;
+				
+			} catch (SellerException e) {
+				System.out.println(e.getMessage());
+			}
+			return login;
+		}
+	
+		
+		public static String SellerRegisterUsecase() {
+			String register = null;
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Enter Seller Name");
+			String Sname = sc.next();
+			
+			System.out.println("Enter Seller Email");
+			String Semail = sc.next();
+			
+			System.out.println("Enter Seller Password");
+			String Spassword = sc.next();
+			
+			SellerDao sdao = new SellerDaoImpl();
+	        Seller seller = new Seller(Sname, Semail, Spassword);
+	        register = sdao.registerSeller(seller);
+			return register;
+		}
+		
+		
+		public static String ItemAddedUsecase(int SellerID) {
+			System.out.println("");
+			
+		}
+
+
+}

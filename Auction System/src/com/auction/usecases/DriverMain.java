@@ -1,6 +1,16 @@
 package com.auction.usecases;
 
+import java.util.List;
 import java.util.Scanner;
+
+import com.auction.Dao.AdminDao;
+import com.auction.Dao.AdminDaoImpl;
+import com.auction.Dao.SellerDao;
+import com.auction.Dao.SellerDaoImpl;
+import com.auction.bean.Buyer;
+import com.auction.bean.Seller;
+import com.auction.bean.Sold;
+import com.auction.exceptions.BuyerException;
 
 public class DriverMain {
 
@@ -24,7 +34,44 @@ public class DriverMain {
               	 System.out.println("3. View the daily selling report.");
               	 System.out.println("4. Exit");
               	 int Achoice = sc.nextInt();
-              	 System.out.println(Achoice);
+              	 AdminDao Adao = new AdminDaoImpl();
+              	 if(Achoice==1) {
+              		 List<Seller> sellerlist = Adao.getSellerList();
+              		 sellerlist.forEach(s -> {
+              			System.out.println("Seller id is : "+ s.getSellerID());
+              			System.out.println("Seller Name is : "+ s.getSname());
+              			System.out.println("Seller Email is : "+ s.getSemail());
+              			System.out.println("Seller Password is : "+ s.getSpassword());
+              			System.out.println("================================");
+              		 });
+              	 }else if(Achoice ==2 ) {
+              		 List<Buyer> buyerlist = Adao.getBuyerList();
+              		buyerlist.forEach(b ->{
+              			System.out.println("Buyer id is : "+ b.getBuyerID());
+              			System.out.println("Buyer Name is : "+ b.getBname());
+              			System.out.println("Buyer Email is : "+ b.getBemail());
+              			System.out.println("Buyer Password is : "+ b.getBpassword());
+              			System.out.println("================================");
+              		});
+              		 
+              	 }else if(Achoice == 3 ) {
+              		 List<Sold> soldList = Adao.getSoldList();
+              		 soldList.forEach(s ->{
+              			System.out.println("Sold Item Id is : "+ s.getSitemId());
+              			System.out.println("Sold Item Name is : "+ s.getSName());
+              			System.out.println("Sold Item Price is : "+ s.getPrice());
+              			System.out.println("Sold Item Quantity is : "+ s.getQuantity());
+              			System.out.println("Sold Item Category is : "+ s.getCategory());
+              			System.out.println("Sold Item BuyerID is : "+ s.getBuyerID());
+              			System.out.println("================================");
+              		 });
+              		 
+              		 
+              	 }else if(Achoice == 4) {
+                      break;
+              	 }else {
+              		System.out.println("Please choose the correct option");
+              	 }
       		 }	 
       	 }
          }else if(choice == 2) {
@@ -33,18 +80,46 @@ public class DriverMain {
       	   System.out.println("2. Register as a Seller");
       	   int num = sc.nextInt();
       	   if(num==1) {
-      		boolean login = SellerUsecases.SellerloginUsecase();
-      		if(login) {
+      		Seller seller = SellerUsecases.SellerloginUsecase();
+      		int SellerKey = seller.getSellerID();
+      		if(seller != null) {
       			while(true) {
       		    System.out.println("Plesae Enter Your Choice");
-                System.out.println("1. Create list of items to sell.");
-                System.out.println("2. Update Item price, quantity");
-                System.out.println("3. Add new Item in the list.");
-                System.out.println("4. Remove items from the list.");
-                System.out.println("5. View the sold Item history.");	
-                System.out.println("6. Exit");
+                System.out.println("1. Add new Items to sell.");
+                System.out.println("2. View All the Items of the seller");
+                System.out.println("3. Remove items from the list.");
+                System.out.println("4. View the sold Item history.");	
+                System.out.println("5. Exit");
                 int Schoice = sc.nextInt();
-             	System.out.println(Schoice);
+                if(Schoice == 1) {
+   		         System.out.println("How Many Items you want to add? ");
+   		         int itemNum = sc.nextInt();
+   		         for(int i=0;i<itemNum;i++) {
+   		      	 String itemAddedResult = SellerUsecases.ItemAddedUsecase(SellerKey);
+            	 System.out.println(itemAddedResult); 
+   		         }
+                }else if(Schoice == 2) {
+                	SellerUsecases.ViewItemBySeller(SellerKey);
+                }else if(Schoice == 3) {
+                	String ItemRemove = SellerUsecases.ItemRemovedUsecase();
+                	System.out.println(ItemRemove);
+                }else if(Schoice == 4) {
+                	 SellerDao Sdao = new SellerDaoImpl();
+                	 List<Sold> soldList = Sdao.getSoldList();
+              		 soldList.forEach(s ->{
+              			System.out.println("Sold Item Id is : "+ s.getSitemId());
+              			System.out.println("Sold Item Name is : "+ s.getSName());
+              			System.out.println("Sold Item Price is : "+ s.getPrice());
+              			System.out.println("Sold Item Quantity is : "+ s.getQuantity());
+              			System.out.println("Sold Item Category is : "+ s.getCategory());
+              			System.out.println("Sold Item BuyerID is : "+ s.getBuyerID());
+              			System.out.println("================================");
+              		 });          	
+                }else if(Schoice == 5) {
+                	break;
+                }else {
+                	System.out.println("Please choose the correct option");
+                }
       			}
          	}
       	   }else if(num==2) {
@@ -59,16 +134,30 @@ public class DriverMain {
            System.out.println("2. Register as a Buyer");
            int num = sc.nextInt();
            if(num==1) {
-        	boolean login = BuyerUsecases.BuyerloginUsecase();
-          	if(login) {
+        	Buyer buyer = BuyerUsecases.BuyerloginUsecase();
+        	int BuyerId = buyer.getBuyerID();
+          	if(buyer != null) {
           	   while(true) {
           		 System.out.println("Plesae Enter Your Choice");
                  System.out.println("1. Search and view Items by category");
-                 System.out.println("2. Select and view all the sellers and also their Items category wise.");
-                 System.out.println("3. Selects Items to buy.");	
-                 System.out.println("4. Exit");
+                 System.out.println("2. Select Items to buy.");	
+                 System.out.println("3. Exit");
                  int Bchoice = sc.nextInt();
               	 System.out.println(Bchoice);
+              	 if(Bchoice == 1) {
+              		 try {
+						BuyerUsecases.searchByCategoryUsecase();
+					} catch (BuyerException e) {
+						System.out.println(e.getMessage());
+					}
+              	 }else if (Bchoice == 2) {
+              	  BuyerUsecases.buyItem(BuyerId);
+              	  
+              	 }else if (Bchoice == 3) {
+              		 break;
+              	 }else {
+              		System.out.println("Please select a correct option");
+              	 }
           	   }
           	}
            }else if(num==2) {
