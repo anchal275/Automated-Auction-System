@@ -1,0 +1,15 @@
+package com.auction.bean;
+
+public class Sold {
+	
+	int SitemId;  
+	String SName; 
+	int Price; 
+	int Quantity;  
+	String Category;  
+	int BuyerID;
+	
+	
+	
+
+}

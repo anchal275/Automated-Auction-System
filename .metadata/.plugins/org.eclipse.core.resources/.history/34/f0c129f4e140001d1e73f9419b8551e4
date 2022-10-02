@@ -1,0 +1,25 @@
+package com.auction.bean;
+
+public class Item {
+	
+	private int ItemId;
+	private String IName;
+	private int Price;
+	private int Quantity;
+	private String Category;
+	private int SellerID;
+	
+	public Item(int itemId, String iName, int price, int quantity, String category, int sellerID) {
+		super();
+		ItemId = itemId;
+		IName = iName;
+		Price = price;
+		Quantity = quantity;
+		Category = category;
+		SellerID = sellerID;
+	}
+	
+	
+	
+
+}

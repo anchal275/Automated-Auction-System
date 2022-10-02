@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.auction.bean.Buyer;
-import com.auction.bean.Seller;
+import com.auction.bean.Item;
 import com.auction.exceptions.BuyerException;
-import com.auction.exceptions.SellerException;
 import com.auction.utility.DBUtil;
 
 public class BuyerDaoImpl implements BuyerDao{
@@ -74,6 +75,142 @@ public class BuyerDaoImpl implements BuyerDao{
 	    
 		return buyer;
 	}
+
+
+
+
+	@Override
+	public List<Item> searchByCategory(String Category) throws BuyerException {
+		List<Item> li = new ArrayList<>();
+		try (Connection conn = DBUtil.ProvideConnection()){
+		    PreparedStatement ps = 
+		    conn.prepareStatement("select * from item Where Category = ?");
+	        ps.setString(1, Category);
+		    ResultSet rs = ps.executeQuery();
+		while(rs.next()) {
+			int id = rs.getInt("ItemId");
+			String n = rs.getString("IName");
+			int p = rs.getInt("Price");
+			int q = rs.getInt("Quantity");
+			String c = rs.getString("Category");
+			int sid = rs.getInt("SellerID");
+			Item item = new Item(id, n, p, q, c, sid);
+			li.add(item);
+		}
+				
+		} catch (SQLException e) {
+		  throw new BuyerException("Please choose the correct Category");
+		}
+		 return li;
+	}
+
+
+
+
+	@Override
+	public List<String> showCategory() {
+		List<String> lsc = new ArrayList<>();
+		try (Connection conn = DBUtil.ProvideConnection()){
+		    PreparedStatement ps = 
+		    conn.prepareStatement("select Category from item group by category");
+		    ResultSet rs = ps.executeQuery();
+		while(rs.next()) {
+			String c = rs.getString("Category");
+			lsc.add(c);
+		}	
+		} catch (SQLException e) {
+		  System.out.println(e.getMessage());
+		}
+		return lsc;
+	}
+
+
+
+
+	@Override
+	public List<Item> showItem() {
+		List<Item> li = new ArrayList<>();
+		try (Connection conn = DBUtil.ProvideConnection()){
+		    PreparedStatement ps = conn.prepareStatement("Select * from item");
+		    ResultSet rs = ps.executeQuery();
+		while(rs.next()) {
+			int id = rs.getInt("ItemId");
+			String n = rs.getString("IName");
+			int p = rs.getInt("Price");
+			int q = rs.getInt("Quantity");
+			String c = rs.getString("Category");
+			int sid = rs.getInt("SellerID");
+			Item item = new Item(id, n, p, q, c, sid);
+			li.add(item);
+		}
+				
+		} catch (SQLException e) {
+		  System.out.println(e.getMessage());
+		}
+		 return li;
+	}
+
+
+
+
+	@Override
+	public Item buyItem(int itemId) {
+		Item item = new Item();
+		try (Connection conn = DBUtil.ProvideConnection()){
+		    PreparedStatement ps = conn.prepareStatement("Select * from item where itemId = ?");
+	        ps.setInt(1, itemId);
+		    ResultSet rs = ps.executeQuery();
+		if(rs.next()) {
+			int id = rs.getInt("ItemId");
+			String n = rs.getString("IName");
+			int p = rs.getInt("Price");
+			int q = rs.getInt("Quantity");
+			String c = rs.getString("Category");
+			int sid = rs.getInt("SellerID");
+			item = new Item(id, n, p, q, c, sid);
+		}else {
+			System.out.println("Please Enter correct Item Id");
+		}
+		} catch (SQLException e) {
+		  System.out.println(e.getMessage());
+		}
+		 return item;
+	}
+
+
+
+
+	@Override
+	public void ItemPurchase(Item item,int BuyerID) {
+		 try(Connection conn = DBUtil.ProvideConnection()) {
+				PreparedStatement ps = 
+				conn.prepareStatement("Insert into Sold values(?,?,?,?,?,?)");
+				
+				ps.setInt(1, item.getItemId());
+				ps.setString(2, item.getIName());
+				ps.setInt(3, item.getPrice());
+				ps.setInt(4,item.getQuantity());
+				ps.setString(5, item.getCategory());
+				ps.setInt(6,BuyerID);
+				int x = ps.executeUpdate();
+			     if(x>0) {	
+			    	 System.out.println("Item Purchased Successfully");
+			     }else {
+			    	 System.out.println("Item Not Purchased");
+			     }
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+	}
+	
+	
+	
+	
+
+
+
+
+
 	
 	
 	
