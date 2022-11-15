@@ -36,5 +36,5 @@ Automated Auction System is fully automatic console application you can perform 
 - Select and view all the buyers and also their Items category wise.
 - Selects Items to buy.
 
-#Contribution
-- Developed by @anchal275
+# Contribution
+Developed by @anchal275
