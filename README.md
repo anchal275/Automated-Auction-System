@@ -13,7 +13,7 @@ Automated Auction System is fully automatic console application you can perform 
 - Buyer
 - Seller
 
-# Role of the users-
+# Role of the users :
 
 # Administrator
 - View the registered buyer list.
@@ -37,4 +37,4 @@ Automated Auction System is fully automatic console application you can perform 
 - Selects Items to buy.
 
 #Contribution
- Developed by @anchal275
+- Developed by @anchal275
